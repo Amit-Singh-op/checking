@@ -1,8 +1,9 @@
-const io = require("socket.io");
+const { Server } = require("socket.io");
+const io = new Server({
+  /* options */
+});
 
-const server = io.listen(3000);
-
-server.on("connection", (socket) => {
+io.on("connection", (socket) => {
   console.log("A client has connected");
 
   socket.on("message", (data) => {
@@ -13,3 +14,5 @@ server.on("connection", (socket) => {
     console.log("A client has disconnected");
   });
 });
+
+io.listen(3000);
